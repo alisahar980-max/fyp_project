@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Profile — Student Task Manager</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           PROFILE PAGE
+        ===================================================== */
+
+        .profile-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #4f46e5;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .profile-heading h2 {
+            margin: 0 0 5px;
+            color: #111827;
+        }
+
+        .profile-heading p {
+            margin: 0;
+            color: #64748b;
+        }
+
+        .profile-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .card-header h2 {
+            margin: 0 0 5px;
+            color: #111827;
+        }
+
+        .card-header p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .card-header > i {
+            font-size: 22px;
+            color: #4f46e5;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper > i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            pointer-events: none;
+        }
+
+        .input-wrapper input,
+        .input-wrapper select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px 14px 12px 42px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            outline: none;
+            background: #ffffff;
+            color: #111827;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .input-wrapper input:focus,
+        .input-wrapper select:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Disabled fields */
+
+        .input-wrapper input:disabled,
+        .input-wrapper select:disabled {
+            background: #f8fafc;
+            color: #64748b;
+            cursor: not-allowed;
+        }
+
+        /* Edit mode */
+
+        .profile-editing
+        .input-wrapper input:disabled,
+        .profile-editing
+        .input-wrapper select:disabled {
+            background: #ffffff;
+            color: #111827;
+            cursor: text;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .edit-profile-btn {
+            border: none;
+            background: #4f46e5;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .edit-profile-btn:hover {
+            opacity: 0.9;
+        }
+
+        .cancel-profile-btn {
+            border: 1px solid #d1d5db;
+            background: #ffffff;
+            color: #374151;
+            padding: 10px 16px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .cancel-profile-btn:hover {
+            background: #f8fafc;
+        }
+
+        .success-message {
+            display: none;
+            margin-bottom: 18px;
+            padding: 12px 15px;
+            border-radius: 9px;
+            background: #ecfdf5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+            font-size: 14px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .account-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .info-item {
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .info-item span {
+            display: block;
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .info-item strong {
+            color: #111827;
+        }
+
+        .status-active {
+            color: #059669 !important;
+        }
+
+        @media (max-width: 700px) {
+
+            .profile-header {
+                align-items: flex-start;
+            }
+
+            .account-info {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo-section">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+
+                <h2>StudentTask</h2>
+
+                <p>
+                    Academic Task Manager
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="menu-section">
+
+            <p class="menu-title">
+                MAIN MENU
+            </p>
+
+
+            <a
+                href="dashboard.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-table-columns"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="tasks.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-list-check"></i>
+
+                <span>
+                    My Tasks
+                </span>
+
+            </a>
+
+
+            <a
+                href="analytics.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>
+                    Analytics
+                </span>
+
+            </a>
+
+
+            <p class="menu-title account-title">
+                ACCOUNT
+            </p>
+
+
+            <a
+                href="profile.html"
+                class="menu-item active"
+            >
+
+                <i class="fa-solid fa-user"></i>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             SIDEBAR BOTTOM
+        ================================================== -->
+
+        <div class="sidebar-bottom">
+
+            <!-- HELP -->
+
+            <a
+                href="help.html"
+                class="help-box"
+                style="text-decoration:none; color:inherit;"
+            >
+
+                <i class="fa-solid fa-circle-question"></i>
+
+                <div>
+
+                    <strong>
+                        Need help?
+                    </strong>
+
+                    <p>
+                        Manage your tasks easily.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <!-- LOGOUT -->
+
+            <button
+                type="button"
+                id="sidebar-logout-btn"
+                class="logout-link"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOP HEADER -->
+
+        <header class="top-header">
+
+            <div class="header-left">
+
+                <h1>
+                    My Profile
+                </h1>
+
+                <p>
+                    Manage your personal information.
+                </p>
+
+            </div>
+
+
+            <div class="user-area">
+
+                <div class="welcome">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <div>
+
+                        <span>
+                            Welcome back
+                        </span>
+
+                        <strong id="username">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="logout-btn"
+                    class="header-logout"
+                    title="Logout"
+                >
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             PROFILE
+        ====================================================== -->
+
+        <section class="profile-container">
+
+
+            <!-- PROFILE HEADER -->
+
+            <div class="profile-header">
+
+                <div
+                    class="profile-avatar"
+                    id="profileAvatar"
+                >
+                    S
+                </div>
+
+
+                <div class="profile-heading">
+
+                    <h2 id="profileName">
+                        Student
+                    </h2>
+
+                    <p>
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                        Student
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PERSONAL INFORMATION
+            ================================================== -->
+
+            <div
+                class="profile-card"
+                id="profileCard"
+            >
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Personal Information
+                        </h2>
+
+                        <p>
+                            Update your profile information.
+                        </p>
+
+                    </div>
+
+
+                    <div style="display:flex; align-items:center; gap:12px;">
+
+                        <i class="fa-solid fa-user-pen"></i>
+
+                        <button
+                            type="button"
+                            id="editProfileBtn"
+                            class="edit-profile-btn"
+                        >
+
+                            <i class="fa-solid fa-pen"></i>
+
+                            Edit Profile
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MESSAGE -->
+
+                <div
+                    id="profileMessage"
+                    class="success-message"
+                ></div>
+
+
+
+                <!-- FORM -->
+
+                <form id="profileForm">
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="form-group">
+
+                        <label for="fullName">
+                            Full Name
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            <input
+                                type="text"
+                                id="fullName"
+                                placeholder="Enter your full name"
+                                disabled
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email"
+                                disabled
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STUDENT ID -->
+
+                    <div class="form-group">
+
+                        <label for="studentId">
+                            Student ID
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-id-card"></i>
+
+                            <input
+                                type="text"
+                                id="studentId"
+                                placeholder="Enter student ID"
+                                disabled
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- DEPARTMENT -->
+
+                    <div class="form-group">
+
+                        <label for="department">
+                            Department
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-building-columns"></i>
+
+                            <input
+                                type="text"
+                                id="department"
+                                placeholder="e.g. Computer Science"
+                                disabled
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SEMESTER -->
+
+                    <div class="form-group">
+
+                        <label for="semester">
+                            Semester
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-book"></i>
+
+                            <select
+                                id="semester"
+                                disabled
+                            >
+
+                                <option value="">
+                                    Select Semester
+                                </option>
+
+                                <option value="1st Semester">
+                                    1st Semester
+                                </option>
+
+                                <option value="2nd Semester">
+                                    2nd Semester
+                                </option>
+
+                                <option value="3rd Semester">
+                                    3rd Semester
+                                </option>
+
+                                <option value="4th Semester">
+                                    4th Semester
+                                </option>
+
+                                <option value="5th Semester">
+                                    5th Semester
+                                </option>
+
+                                <option value="6th Semester">
+                                    6th Semester
+                                </option>
+
+                                <option value="7th Semester">
+                                    7th Semester
+                                </option>
+
+                                <option value="8th Semester">
+                                    8th Semester
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- FORM ACTIONS -->
+
+                    <div
+                        class="form-actions"
+                        id="profileActions"
+                        style="display:none;"
+                    >
+
+                        <button
+                            type="button"
+                            id="cancelProfileBtn"
+                            class="cancel-profile-btn"
+                        >
+
+                            <i class="fa-solid fa-xmark"></i>
+
+                            Cancel
+
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="btn-primary"
+                        >
+
+                            <i class="fa-solid fa-floppy-disk"></i>
+
+                            Save Changes
+
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ACCOUNT INFORMATION
+            ================================================== -->
+
+            <div class="profile-card account-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Account Information
+                        </h2>
+
+                        <p>
+                            Your Student Task Manager account.
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                </div>
+
+
+                <div class="account-info">
+
+
+                    <div class="info-item">
+
+                        <span>
+                            Account Type
+                        </span>
+
+                        <strong>
+                            Student
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span>
+                            Account Status
+                        </span>
+
+                        <strong class="status-active">
+                            Active
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span>
+                            Member Since
+                        </span>
+
+                        <strong id="memberSince">
+                            2026
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script src="../js/api.js"></script>
+
+<script src="../js/profile.js"></script>
+
+<script src="../js/logout.js"></script>
+
+
+</body>
+
+</html>

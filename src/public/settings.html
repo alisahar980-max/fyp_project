@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings — Student Task Manager</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo-section">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <h2>StudentTask</h2>
+                <p>Academic Task Manager</p>
+            </div>
+
+        </div>
+
+
+        <div class="menu-section">
+
+            <p class="menu-title">MAIN MENU</p>
+
+
+            <a href="dashboard.html" class="menu-item">
+                <i class="fa-solid fa-table-columns"></i>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a href="tasks.html" class="menu-item">
+                <i class="fa-solid fa-list-check"></i>
+                <span>My Tasks</span>
+            </a>
+
+
+            <a href="analytics.html" class="menu-item">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Analytics</span>
+            </a>
+
+
+            <p class="menu-title account-title">
+                ACCOUNT
+            </p>
+
+
+            <a href="profile.html" class="menu-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+
+
+            <a href="settings.html"
+               class="menu-item active">
+
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             SIDEBAR BOTTOM
+        ================================================== -->
+
+        <div class="sidebar-bottom">
+
+            <div class="help-box">
+
+                <i class="fa-solid fa-circle-question"></i>
+
+                <div>
+
+                    <strong>Need help?</strong>
+
+                    <p>
+                        Manage your tasks easily.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="sidebar-logout-btn"
+                class="logout-link">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Settings
+                </h1>
+
+                <p>
+                    Customize your task manager preferences.
+                </p>
+
+            </div>
+
+
+            <div class="user-area">
+
+                <div class="welcome">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <div>
+
+                        <span>
+                            Welcome back
+                        </span>
+
+                        <strong id="username">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             SETTINGS CONTAINER
+        ================================================== -->
+
+        <section class="settings-container">
+
+
+            <!-- =================================================
+                 APPEARANCE
+            ================================================== -->
+
+            <div class="settings-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Appearance
+                        </h2>
+
+                        <p>
+                            Customize how your task manager looks.
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-palette"></i>
+
+                </div>
+
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+                            <i class="fa-solid fa-moon"></i>
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Dark Mode
+                            </h3>
+
+                            <p>
+                                Use a dark theme throughout the application.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="darkModeToggle">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 NOTIFICATIONS
+            ================================================== -->
+
+            <div class="settings-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Notifications
+                        </h2>
+
+                        <p>
+                            Manage your task notifications and reminders.
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-bell"></i>
+
+                </div>
+
+
+
+                <!-- TASK NOTIFICATIONS -->
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Task Notifications
+                            </h3>
+
+                            <p>
+                                Receive browser notifications about your tasks.
+                            </p>
+
+                            <small
+                                id="notificationStatus">
+                                Notifications are enabled in settings.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="notificationsToggle">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- TASK REMINDERS -->
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Task Reminders
+                            </h3>
+
+                            <p>
+                                Enable reminders for upcoming task deadlines.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="taskRemindersToggle">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- EMAIL REMINDERS -->
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Email Reminders
+                            </h3>
+
+                            <p>
+                                Enable email reminder preferences.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="emailToggle">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- TEST NOTIFICATION -->
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Test Notification
+                            </h3>
+
+                            <p>
+                                Check whether browser notifications are working.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="btn-secondary"
+                        id="testNotificationBtn">
+
+                        <i class="fa-solid fa-bell"></i>
+
+                        Test
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TASK PREFERENCES
+            ================================================== -->
+
+            <div class="settings-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Task Preferences
+                        </h2>
+
+                        <p>
+                            Choose your default task settings.
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-sliders"></i>
+
+                </div>
+
+
+                <div class="setting-form">
+
+
+                    <!-- DEFAULT PRIORITY -->
+
+                    <div class="form-group">
+
+                        <label for="defaultPriority">
+
+                            <i class="fa-solid fa-flag"></i>
+
+                            Default Task Priority
+
+                        </label>
+
+
+                        <select id="defaultPriority">
+
+                            <option value="low">
+                                Low
+                            </option>
+
+                            <option value="medium">
+                                Medium
+                            </option>
+
+                            <option value="high">
+                                High
+                            </option>
+
+                        </select>
+
+
+                        <small>
+                            This priority will automatically be selected
+                            when creating a new task.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- DEFAULT VIEW -->
+
+                    <div class="form-group">
+
+                        <label for="defaultView">
+
+                            <i class="fa-solid fa-table-list"></i>
+
+                            Default Task View
+
+                        </label>
+
+
+                        <select id="defaultView">
+
+                            <option value="list">
+                                List View
+                            </option>
+
+                            <option value="grid">
+                                Grid View
+                            </option>
+
+                        </select>
+
+
+                        <small>
+                            This view will automatically be used
+                            when opening My Tasks.
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ACTION BUTTONS
+            ================================================== -->
+
+            <div class="settings-actions">
+
+                <button
+                    type="button"
+                    class="btn-primary"
+                    id="saveSettingsBtn">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save Settings
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="resetSettingsBtn">
+
+                    <i class="fa-solid fa-rotate-left"></i>
+
+                    Reset
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ACCOUNT / CLEAR TASKS
+            ================================================== -->
+
+            <div class="settings-card danger-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Account
+                        </h2>
+
+                        <p>
+                            Manage your local application data.
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                </div>
+
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+                            <i class="fa-solid fa-trash"></i>
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Clear Task Data
+                            </h3>
+
+                            <p>
+                                Permanently remove all saved tasks
+                                from this browser.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="btn-danger"
+                        id="clearTasksBtn">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        Clear Tasks
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="../js/api.js"></script>
+
+<script src="../js/settings.js"></script>
+
+<script src="../js/help.js"></script>
+
+<script src="../js/logout.js"></script>
+
+</body>
+
+</html>

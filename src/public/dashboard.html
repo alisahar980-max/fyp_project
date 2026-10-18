@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard — Student Task Manager</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <h2>StudentTask</h2>
+                <p>Academic Task Manager</p>
+            </div>
+        </div>
+
+        <div class="menu-section">
+
+            <p class="menu-title">MAIN MENU</p>
+
+            <a href="dashboard.html" class="menu-item active">
+                <i class="fa-solid fa-table-columns"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="tasks.html" class="menu-item">
+                <i class="fa-solid fa-list-check"></i>
+                <span>My Tasks</span>
+            </a>
+
+            <a href="analytics.html" class="menu-item">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Analytics</span>
+            </a>
+
+            <p class="menu-title account-title">ACCOUNT</p>
+
+            <a href="profile.html" class="menu-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+
+            <a href="settings.html" class="menu-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </div>
+
+        <div class="sidebar-bottom">
+
+            <div class="help-box">
+                <i class="fa-solid fa-circle-question"></i>
+
+                <div>
+                    <strong>Need help?</strong>
+                    <p>Manage your tasks easily.</p>
+                </div>
+            </div>
+
+            <button type="button"
+                    id="sidebar-logout-btn"
+                    class="logout-link">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+    <main class="main-content">
+
+        <header class="top-header">
+
+            <div>
+                <h1>Dashboard</h1>
+                <p>Manage your academic tasks and productivity.</p>
+            </div>
+
+            <div class="user-area">
+
+                <div class="welcome">
+                    <i class="fa-solid fa-user"></i>
+
+                    <div>
+                        <span>Welcome back</span>
+                        <strong id="username">Loading...</strong>
+                    </div>
+                </div>
+
+            
+
+            </div>
+
+        </header>
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-list"></i>
+                </div>
+
+                <div>
+                    <h3 id="totalTasks">0</h3>
+                    <p>Total Tasks</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div>
+                    <h3 id="completedTasks">0</h3>
+                    <p>Completed</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <div>
+                    <h3 id="pendingTasks">0</h3>
+                    <p>Pending</p>
+                </div>
+            </div>
+
+            <div class="stat-card overdue-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                <div>
+                    <h3 id="overdueTasks">0</h3>
+                    <p>Overdue</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon completion-icon">
+                    <i class="fa-solid fa-chart-pie"></i>
+                </div>
+
+                <div>
+                    <h3 id="completionRate">0%</h3>
+                    <p>Completion Rate</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="charts-grid">
+
+            <div class="chart-card">
+
+                <div class="chart-header">
+                    <div>
+                        <h2>Weekly Productivity</h2>
+                        <p>Tasks completed during the last 7 days</p>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+
+            </div>
+
+            <div class="chart-card">
+
+                <div class="chart-header">
+                    <div>
+                        <h2>Tasks by Category</h2>
+                        <p>Completed vs total tasks per subject</p>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+<script src="/js/api.js"></script>
+<script src="/js/dashboard.js"></script>
+<script src="/js/logout.js"></script>
+<script src="../js/help.js"></script>
+
+</body>
+</html>

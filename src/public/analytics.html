@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Analytics — Student Task Manager</title>
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+```
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+```
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo-section">
+        <div class="logo-icon">
+            <i class="fas fa-graduation-cap"></i>
+        </div>
+
+        <div>
+            <h2>StudentTask</h2>
+            <p>Academic Task Manager</p>
+        </div>
+    </div>
+
+    <nav class="menu-section">
+
+        <p class="menu-title">MAIN MENU</p>
+
+        <a href="/dashboard.html" class="menu-item">
+            <i class="fas fa-table-columns"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="/tasks.html" class="menu-item">
+            <i class="fas fa-list-check"></i>
+            <span>My Tasks</span>
+        </a>
+
+        <a href="/analytics.html" class="menu-item active">
+            <i class="fas fa-chart-line"></i>
+            <span>Analytics</span>
+        </a>
+
+        <p class="menu-title account-title">ACCOUNT</p>
+
+        <a href="/profile.html" class="menu-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+        <a href="/settings.html" class="menu-item">
+            <i class="fas fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+    <div class="help-box">
+
+        <i class="fas fa-circle-question"></i>
+
+        <div>
+            <strong>Need help?</strong>
+            <p>Manage your tasks easily.</p>
+        </div>
+
+    </div>
+
+    <button type="button"
+            id="sidebar-logout-btn"
+            class="logout-link">
+
+        <i class="fas fa-right-from-bracket"></i>
+        <span>Logout</span>
+
+    </button>
+
+</div>
+
+</aside>
+
+
+<main class="main-content">
+
+    <header class="top-header">
+
+        <div>
+            <h1>Analytics</h1>
+            <p>Track your task performance and productivity.</p>
+        </div>
+
+        <div class="user-area">
+
+                <div class="welcome">
+                    <i class="fa-solid fa-user"></i>
+
+                    <div>
+                        <span>Welcome back</span>
+                        <strong id="username">Loading...</strong>
+                    </div>
+                </div>
+
+            <button type="button"
+                    id="logout-btn"
+                    class="header-logout">
+
+                <i class="fas fa-right-from-bracket"></i>
+                Logout
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <section class="analytics-container">
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+
+                <div>
+                    <h3 id="totalTasks">0</h3>
+                    <p>Total Tasks</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div>
+                    <h3 id="completedTasks">0</h3>
+                    <p>Completed</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <div>
+                    <h3 id="pendingTasks">0</h3>
+                    <p>Pending</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-chart-pie"></i>
+                </div>
+
+                <div>
+                    <h3 id="completionRate">0%</h3>
+                    <p>Completion Rate</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="analytics-grid">
+
+            <div class="analytics-card">
+
+                <div class="card-header">
+
+                    <h2>Task Progress</h2>
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                </div>
+
+
+                <div class="progress-item">
+
+                    <div class="progress-label">
+
+                        <span>Completed</span>
+
+                        <strong id="completedPercent">
+                            0%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-bar">
+
+                        <div
+                            class="progress-fill completed"
+                            id="completedProgress">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="progress-item">
+
+                    <div class="progress-label">
+
+                        <span>Pending</span>
+
+                        <strong id="pendingPercent">
+                            0%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-bar">
+
+                        <div
+                            class="progress-fill pending"
+                            id="pendingProgress">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <div class="card-header">
+
+                    <h2>Priority Distribution</h2>
+
+                    <i class="fa-solid fa-layer-group"></i>
+
+                </div>
+
+
+                <div class="priority-list">
+
+                    <div class="priority-row">
+
+                        <span>
+                            <i class="fa-solid fa-circle"></i>
+                            High
+                        </span>
+
+                        <strong id="highTasks">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="priority-row">
+
+                        <span>
+                            <i class="fa-solid fa-circle"></i>
+                            Medium
+                        </span>
+
+                        <strong id="mediumTasks">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="priority-row">
+
+                        <span>
+                            <i class="fa-solid fa-circle"></i>
+                            Low
+                        </span>
+
+                        <strong id="lowTasks">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="analytics-card productivity-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>Productivity Overview</h2>
+
+                    <p>
+                        Your task completion performance
+                    </p>
+
+                </div>
+
+                <i class="fa-solid fa-chart-line"></i>
+
+            </div>
+
+
+            <div class="productivity-content">
+
+                <div class="productivity-circle"
+                     id="productivityCircle">
+
+                    <div class="circle-content">
+
+                        <strong id="circleRate">
+                            0%
+                        </strong>
+
+                        <span>
+                            Completed
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="productivity-details">
+
+                    <div>
+
+                        <span>Total Tasks</span>
+
+                        <strong id="detailTotal">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Completed Tasks</span>
+
+                        <strong id="detailCompleted">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Remaining Tasks</span>
+
+                        <strong id="detailPending">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+```
+
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/analytics.js"></script>
+<script src="/js/logout.js"></script>
+<script src="../js/help.js"></script>
+</body>
+</html>

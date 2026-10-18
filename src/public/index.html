@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Login — Student Task Manager</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+<link rel="stylesheet" href="/css/style.css">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+    }
+
+    .auth-wrapper {
+        min-height: 100vh;
+        background:
+            radial-gradient(
+                circle at top left,
+                rgba(59, 130, 246, 0.12),
+                transparent 35%
+            ),
+            linear-gradient(
+                135deg,
+                #eef5ff 0%,
+                #f8fbff 50%,
+                #eef6ff 100%
+            );
+    }
+
+    .main-card {
+        min-height: 680px;
+        max-width: 1100px;
+        border-radius: 28px;
+        overflow: hidden;
+        background: #ffffff;
+        box-shadow:
+            0 25px 70px rgba(15, 23, 42, 0.14),
+            0 8px 25px rgba(37, 99, 235, 0.08);
+    }
+
+    .left-panel {
+        width: 42%;
+        min-height: 680px;
+        position: relative;
+        overflow: hidden;
+
+        background:
+            radial-gradient(
+                circle at 15% 15%,
+                rgba(255, 255, 255, 0.18),
+                transparent 28%
+            ),
+            radial-gradient(
+                circle at 85% 85%,
+                rgba(96, 165, 250, 0.25),
+                transparent 32%
+            ),
+            linear-gradient(
+                145deg,
+                #0f5fc4 0%,
+                #1675d1 48%,
+                #0b56b0 100%
+            );
+    }
+
+    .left-panel::before {
+        content: "";
+        position: absolute;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.07);
+        top: -130px;
+        left: -120px;
+    }
+
+    .left-panel::after {
+        content: "";
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        bottom: -190px;
+        right: -150px;
+    }
+
+    .welcome-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .welcome-title {
+        color: white;
+        font-size: 38px;
+        line-height: 1.15;
+        font-weight: 800;
+        margin-bottom: 18px;
+    }
+
+    .welcome-line {
+        width: 65px;
+        height: 4px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.45);
+        margin: 0 auto 22px;
+    }
+
+    .welcome-description {
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 14px;
+        line-height: 1.8;
+        max-width: 370px;
+        margin: 0 auto;
+    }
+
+    .student-icon-wrapper {
+        width: 205px;
+        height: 205px;
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: rgba(255, 255, 255, 0.10);
+        border: 1px solid rgba(255, 255, 255, 0.20);
+
+        box-shadow:
+            inset 0 0 40px rgba(255, 255, 255, 0.06),
+            0 15px 40px rgba(0, 0, 0, 0.10);
+    }
+
+    .student-icon {
+        font-size: 105px;
+        color: white;
+    }
+
+    .welcome-features {
+        margin-top: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+    }
+
+    .welcome-feature {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: rgba(255, 255, 255, 0.90);
+        font-size: 13px;
+    }
+
+    .welcome-feature i {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 10px;
+    }
+
+    .right-panel {
+        width: 58%;
+        background: white;
+    }
+
+    .brand-icon {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: #eff6ff;
+        border-radius: 14px;
+    }
+
+    .input-focus:focus {
+        border-color: #3b82f6 !important;
+        background: #ffffff !important;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+    }
+
+    .forgot-link {
+        color: #2563eb;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .forgot-link:hover {
+        text-decoration: underline;
+    }
+
+    .toggle-password {
+        color: #2563eb;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 7px 10px;
+        border-radius: 8px;
+    }
+
+    .toggle-password:hover {
+        background: #eff6ff;
+    }
+
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 20px;
+
+        background: rgba(15, 23, 42, 0.55);
+        backdrop-filter: blur(5px);
+    }
+
+    .modal-overlay.hidden {
+        display: none;
+    }
+
+    .modal-box {
+        box-shadow: 0 25px 70px rgba(15, 23, 42, 0.25);
+    }
+
+    @media (max-width: 768px) {
+
+        .auth-wrapper {
+            padding: 15px;
+        }
+
+        .main-card {
+            flex-direction: column;
+            min-height: auto;
+        }
+
+        .left-panel,
+        .right-panel {
+            width: 100%;
+        }
+
+        .left-panel {
+            min-height: auto;
+            padding: 45px 30px;
+        }
+
+        .welcome-title {
+            font-size: 30px;
+        }
+
+        .student-icon-wrapper {
+            width: 150px;
+            height: 150px;
+            margin-top: 30px;
+        }
+
+        .student-icon {
+            font-size: 75px;
+        }
+
+        .welcome-features {
+            align-items: center;
+        }
+
+        .right-panel {
+            padding: 35px 25px;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+
+<main class="auth-wrapper min-h-screen flex items-center justify-center p-4 md:p-8">
+
+<div class="main-card w-full flex">
+
+    <section class="left-panel text-white flex flex-col justify-between p-8 md:p-10">
+
+        <div class="welcome-content text-center">
+
+            <div class="flex items-center justify-center gap-3 mb-8">
+
+                <div class="w-11 h-11 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-xl text-white"></i>
+                </div>
+
+                <div class="text-left">
+
+                    <h2 class="text-xl font-bold text-white">
+                        StudentTask
+                    </h2>
+
+                    <p class="text-xs text-white/60">
+                        Academic Task Manager
+                    </p>
+
+                </div>
+
+            </div>
+
+            <h1 class="welcome-title">
+                Welcome, Student!
+            </h1>
+
+            <div class="welcome-line"></div>
+
+            <p class="welcome-description">
+                Manage your academic life with ease.
+                Organize assignments, track deadlines,
+                and stay focused on your goals — all
+                in one simple place.
+            </p>
+
+            <div class="flex justify-center mt-8">
+
+                <div class="student-icon-wrapper">
+                    <i class="fas fa-user-graduate student-icon"></i>
+                </div>
+
+            </div>
+
+            <div class="welcome-features">
+
+                <div class="welcome-feature">
+                    <i class="fas fa-check"></i>
+                    <span>
+                        Organize your academic tasks
+                    </span>
+                </div>
+
+                <div class="welcome-feature">
+                    <i class="fas fa-check"></i>
+                    <span>
+                        Track deadlines and assignments
+                    </span>
+                </div>
+
+                <div class="welcome-feature">
+                    <i class="fas fa-check"></i>
+                    <span>
+                        Monitor your academic progress
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="welcome-content text-center mt-8">
+
+            <p class="text-xs text-white/60">
+                Your academic journey starts here
+            </p>
+
+            <p class="text-sm font-semibold text-white mt-1">
+                Organize · Track · Succeed
+            </p>
+
+        </div>
+
+    </section>
+
+    <section class="right-panel p-8 md:p-12">
+
+        <div class="text-center mb-8">
+
+            <div class="flex items-center justify-center gap-3 mb-3">
+
+                <div class="brand-icon">
+                    <i class="fas fa-graduation-cap text-2xl text-blue-600"></i>
+                </div>
+
+                <h1 class="text-2xl font-light text-gray-800">
+                    Student<span class="font-bold text-blue-600">
+                        Task
+                    </span>
+                </h1>
+
+            </div>
+
+            <p class="text-sm text-gray-500">
+                Organize · Track · Succeed
+            </p>
+
+        </div>
+
+        <div class="flex bg-gray-100 rounded-xl p-1 mb-8">
+
+            <button
+                type="button"
+                class="tab flex-1 py-3 text-sm font-semibold rounded-lg transition-all tab-active"
+                data-tab="login"
+                id="tab-login"
+            >
+                <i class="fas fa-sign-in-alt mr-2"></i>
+                Login
+            </button>
+
+            <button
+                type="button"
+                class="tab flex-1 py-3 text-sm font-semibold rounded-lg transition-all tab-inactive"
+                data-tab="register"
+                id="tab-register"
+            >
+                <i class="fas fa-user-plus mr-2"></i>
+                Register
+            </button>
+
+        </div>
+
+        <form id="login-form" class="auth-form space-y-5">
+
+            <div>
+
+                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                    <i class="far fa-envelope mr-2"></i>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    required
+                    autocomplete="email"
+                    class="input-focus w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-gray-50 outline-none text-gray-800 text-sm transition-all"
+                    placeholder="student@university.edu"
+                >
+
+            </div>
+
+            <div>
+
+                <div class="flex items-center justify-between mb-2">
+
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        <i class="fas fa-lock mr-2"></i>
+                        Password
+                    </label>
+
+                    <button
+                        type="button"
+                        class="forgot-link bg-transparent border-0 p-0"
+                        id="forgotPasswordBtn"
+                    >
+                        Forgot password?
+                    </button>
+
+                </div>
+
+                <div class="relative flex items-center bg-gray-50 rounded-xl border border-gray-200 focus-within:border-blue-500 transition-all">
+
+                    <input
+                        type="password"
+                        name="password"
+                        required
+                        autocomplete="current-password"
+                        class="w-full px-4 py-3.5 bg-transparent outline-none text-gray-800 text-sm"
+                        placeholder="••••••••"
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle-password absolute right-2"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-3 text-sm"
+            >
+                <i class="fas fa-arrow-right-to-bracket"></i>
+                <span>
+                    Sign In
+                </span>
+            </button>
+
+        </form>
+
+        <form
+            id="register-form"
+            class="auth-form space-y-5 hidden"
+        >
+
+            <div>
+
+                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                    <i class="far fa-user mr-2"></i>
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    required
+                    autocomplete="name"
+                    class="input-focus w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-gray-50 outline-none text-gray-800 text-sm transition-all"
+                    placeholder="Your full name"
+                >
+
+            </div>
+
+            <div>
+
+                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                    <i class="far fa-envelope mr-2"></i>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    required
+                    autocomplete="email"
+                    class="input-focus w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-gray-50 outline-none text-gray-800 text-sm transition-all"
+                    placeholder="student@university.edu"
+                >
+
+            </div>
+
+            <div>
+
+                <label class="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                    <i class="fas fa-shield-alt mr-2 text-gray-400"></i>
+                    Security Question
+                </label>
+
+                <select
+                    name="securityQuestion"
+                    required
+                    class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-blue-500 transition-all duration-200 outline-none text-gray-800 text-sm"
+                >
+                    <option value="">
+                        Select a security question
+                    </option>
+
+                    <option value="What is your favorite color?">
+                        What is your favorite color?
+                    </option>
+                </select>
+
+            </div>
+
+            <div>
+
+                <label class="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                    <i class="fas fa-key mr-2 text-gray-400"></i>
+                    Security Answer
+                </label>
+
+                <input
+                    type="text"
+                    name="securityAnswer"
+                    required
+                    class="input-focus w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 outline-none text-gray-800 text-sm"
+                    placeholder="Enter your answer"
+                >
+
+            </div>
+
+            <div>
+
+                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                    <i class="fas fa-key mr-2"></i>
+                    Password
+                    <span class="text-gray-400 font-normal">
+                        (min 6)
+                    </span>
+                </label>
+
+                <div class="relative flex items-center bg-gray-50 rounded-xl border border-gray-200 focus-within:border-blue-500 transition-all">
+
+                    <input
+                        type="password"
+                        name="password"
+                        required
+                        minlength="6"
+                        autocomplete="new-password"
+                        class="w-full px-4 py-3.5 bg-transparent outline-none text-gray-800 text-sm"
+                        placeholder="••••••••"
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle-password absolute right-2"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-3 text-sm"
+            >
+                <i class="fas fa-user-plus"></i>
+                <span>
+                    Create Account
+                </span>
+            </button>
+
+        </form>
+
+        <div
+            id="auth-message"
+            class="message mt-6 text-sm text-center text-gray-500 bg-gray-50 py-3 rounded-xl border border-gray-100"
+            role="alert"
+        >
+            Ready to organize your academic journey
+        </div>
+
+        <div
+            class="mt-6 flex items-center justify-center gap-5 text-xs text-gray-400 border-t border-gray-100 pt-5"
+        >
+
+            <span>
+                <i class="fas fa-shield-alt mr-1"></i>
+                Secure
+            </span>
+
+            <span class="w-px h-4 bg-gray-200"></span>
+
+            <span>
+                <i class="fas fa-sync-alt mr-1"></i>
+                Sync
+            </span>
+
+            <span class="w-px h-4 bg-gray-200"></span>
+
+            <span>
+                <i class="fas fa-clock mr-1"></i>
+                24/7
+            </span>
+
+        </div>
+
+    </section>
+
+</div>
+
+</main>
+
+<div
+    id="forgotModal"
+    class="modal-overlay hidden"
+>
+
+<div
+    class="modal-box bg-white rounded-3xl p-8 max-w-md w-full"
+>
+
+    <div class="text-center mb-6">
+
+        <div
+            class="bg-blue-50 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
+        >
+            <i class="fas fa-key text-2xl text-blue-600"></i>
+        </div>
+
+        <h3 class="text-xl font-bold text-gray-800">
+            Reset Password
+        </h3>
+
+        <p class="text-sm text-gray-500 mt-2">
+            Enter your email and create a new password.
+        </p>
+
+    </div>
+
+    <form
+        id="forgotForm"
+        class="space-y-4"
+    >
+
+        <div>
+
+            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                <i class="far fa-envelope mr-2"></i>
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="resetEmail"
+                name="email"
+                required
+                autocomplete="email"
+                class="input-focus w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 outline-none text-gray-800 text-sm"
+                placeholder="student@university.edu"
+            >
+
+        </div>
+
+        <div>
+
+            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                <i class="fas fa-lock mr-2"></i>
+                New Password
+            </label>
+
+            <div class="relative flex items-center bg-gray-50 rounded-xl border border-gray-200 focus-within:border-blue-500 transition-all">
+
+                <input
+                    type="password"
+                    id="resetPassword"
+                    name="newPassword"
+                    required
+                    minlength="6"
+                    autocomplete="new-password"
+                    class="w-full px-4 py-3.5 bg-transparent outline-none text-gray-800 text-sm"
+                    placeholder="••••••••"
+                >
+
+                <button
+                    type="button"
+                    class="toggle-password absolute right-2"
+                >
+                    Show
+                </button>
+
+            </div>
+
+        </div>
+
+        <div>
+
+            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                <i class="fas fa-lock mr-2"></i>
+                Confirm Password
+            </label>
+
+            <div class="relative flex items-center bg-gray-50 rounded-xl border border-gray-200 focus-within:border-blue-500 transition-all">
+
+                <input
+                    type="password"
+                    id="confirmResetPassword"
+                    name="confirmPassword"
+                    required
+                    minlength="6"
+                    autocomplete="new-password"
+                    class="w-full px-4 py-3.5 bg-transparent outline-none text-gray-800 text-sm"
+                    placeholder="••••••••"
+                >
+
+                <button
+                    type="button"
+                    class="toggle-password absolute right-2"
+                >
+                    Show
+                </button>
+
+            </div>
+
+        </div>
+
+        <div
+            id="modalStatus"
+            class="text-sm text-center hidden"
+            role="alert"
+        ></div>
+
+        <div class="flex gap-3 pt-2">
+
+            <button
+                type="button"
+                id="closeModalBtn"
+                class="flex-1 px-4 py-3 rounded-xl border border-gray-200 text-gray-600 font-medium hover:bg-gray-50 transition-all text-sm"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="submit"
+                id="sendResetBtn"
+                class="flex-1 px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all text-sm"
+            >
+                Reset Password
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+</div>
+
+<script src="/js/api.js"></script>
+
+<script src="/js/auth.js"></script>
+
+<script src="/js/logout.js"></script>
+
+</body>
+</html>

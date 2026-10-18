@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Tasks — Student Task Manager</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <h2>StudentTask</h2>
+                <p>Academic Task Manager</p>
+            </div>
+        </div>
+
+        <nav class="menu-section">
+
+            <p class="menu-title">MAIN MENU</p>
+
+            <a href="/dashboard.html" class="menu-item">
+                <i class="fas fa-table-columns"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/tasks.html" class="menu-item active">
+                <i class="fas fa-list-check"></i>
+                <span>My Tasks</span>
+            </a>
+
+            <a href="/analytics.html" class="menu-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Analytics</span>
+            </a>
+
+            <p class="menu-title account-title">ACCOUNT</p>
+
+            <a href="/profile.html" class="menu-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+
+            <a href="/settings.html" class="menu-item">
+                <i class="fas fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="help-box">
+                <i class="fas fa-circle-question"></i>
+
+                <div>
+                    <strong>Need help?</strong>
+                    <p>Manage your tasks easily.</p>
+                </div>
+            </div>
+
+            <button type="button"
+                    id="sidebar-logout-btn"
+                    class="logout-link">
+
+                <i class="fas fa-right-from-bracket"></i>
+                <span>Logout</span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="top-header">
+
+            <div>
+                <h1>My Tasks</h1>
+                <p>Create, manage and track your academic tasks.</p>
+            </div>
+
+            <div class="user-area">
+
+                <div class="welcome">
+
+                    <i class="fas fa-user"></i>
+
+                    <div>
+                        <span>Welcome back</span>
+                        <strong id="username">Loading...</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="task-toolbar">
+
+            <div class="task-search">
+
+                <i class="fas fa-search"></i>
+
+                <input
+                    type="text"
+                    id="searchTask"
+                    placeholder="Search tasks..."
+                >
+
+            </div>
+
+
+            <div class="task-filters">
+
+                <select id="statusFilter">
+
+                    <option value="all">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                    <option value="overdue">Overdue</option>
+
+                </select>
+
+
+                <select id="priorityFilter">
+
+                    <option value="all">All Priority</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+
+                </select>
+
+
+                <button type="button"
+                        id="add-task-btn"
+                        class="primary-btn">
+
+                    <i class="fas fa-plus"></i>
+                    Add Task
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section class="task-summary">
+
+            <div class="summary-card">
+
+                <span>Total Tasks</span>
+                <strong id="totalTaskCount">0</strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>Pending</span>
+                <strong id="pendingTaskCount">0</strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>Completed</span>
+                <strong id="completedTaskCount">0</strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <span>Overdue</span>
+                <strong id="overdueTaskCount">0</strong>
+
+            </div>
+
+        </section>
+
+
+        <section class="tasks-card">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>All Tasks</h2>
+                    <p>Your academic tasks</p>
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table class="tasks-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Task</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tasksTableBody"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<div class="modal-overlay" id="task-modal">
+
+    <div class="task-modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="modal-title">Add New Task</h2>
+
+                <p id="modal-subtitle">
+                    Create an academic task
+                </p>
+
+            </div>
+
+
+            <button type="button"
+                    id="modal-close"
+                    class="modal-close">
+
+                <i class="fas fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <form id="task-form">
+
+            <input type="hidden" id="task-id">
+
+
+            <div class="form-group">
+
+                <label for="task-title">
+                    Task Title
+                </label>
+
+                <input
+                    type="text"
+                    id="task-title"
+                    placeholder="Enter task title"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="task-description">
+                    Description
+                </label>
+
+                <textarea
+                    id="task-description"
+                    rows="4"
+                    placeholder="Enter task description"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="task-category">
+                        Category
+                    </label>
+
+                    <select id="task-category" required>
+
+                        <option value="">
+                            Select category
+                        </option>
+
+                        <option value="Assignment">
+                            Assignment
+                        </option>
+
+                        <option value="Quiz">
+                            Quiz
+                        </option>
+
+                        <option value="Project">
+                            Project
+                        </option>
+
+                        <option value="Exam">
+                            Exam
+                        </option>
+
+                        <option value="Presentation">
+                            Presentation
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="task-priority">
+                        Priority
+                    </label>
+
+                    <select id="task-priority" required>
+
+                        <option value="">
+                            Select priority
+                        </option>
+
+                        <option value="High">
+                            High
+                        </option>
+
+                        <option value="Medium">
+                            Medium
+                        </option>
+
+                        <option value="Low">
+                            Low
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="task-due-date">
+                    Due Date
+                </label>
+
+                <input
+                    type="date"
+                    id="task-due-date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="task-status">
+                    Status
+                </label>
+
+                <select id="task-status">
+
+                    <option value="Pending">
+                        Pending
+                    </option>
+
+                    <option value="Completed">
+                        Completed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div id="task-message"
+                 class="task-message">
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button type="button"
+                        id="modal-cancel"
+                        class="secondary-btn">
+
+                    Cancel
+
+                </button>
+
+
+                <button type="submit"
+                        id="save-task-btn"
+                        class="primary-btn">
+
+                    <i class="fas fa-check"></i>
+
+                    <span>
+                        Save Task
+                    </span>
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="/js/api.js"></script>
+<script src="/js/tasks.js"></script>
+<script src="/js/logout.js"></script>
+<script src="../js/help.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "name": "student-task-management-system",
+  "version": "1.0.0",
+  "description": "Web-based Student Task Management System with Learning Analytics",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "init-db": "node src/db/init.js"
+  },
+  "keywords": [
+    "tasks",
+    "students",
+    "analytics",
+    "express",
+    "mysql"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.3.0",
+    "debug": "^4.4.3",
+    "dotenv": "^16.6.1",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "nodemailer": "^9.0.6",
+    "object-inspect": "^1.13.4"
+  }
+}

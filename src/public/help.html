@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Help Center — Student Task Manager</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           HELP PAGE
+        ===================================================== */
+
+        .help-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+
+        .help-header-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 1px solid #e5e7eb;
+        }
+
+
+        .help-header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+
+        .help-main-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 16px;
+            background: #eef2ff;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+
+        .help-header-card h2 {
+            margin: 0 0 6px;
+            font-size: 24px;
+            color: #111827;
+        }
+
+
+        .help-header-card p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           HELP CARDS
+        ===================================================== */
+
+        .help-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+
+        .help-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 22px;
+            transition: 0.2s ease;
+        }
+
+
+        .help-card:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 8px 25px
+                rgba(0, 0, 0, 0.08);
+        }
+
+
+        .help-card-top {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 14px;
+        }
+
+
+        .help-card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #eef2ff;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+
+        .help-card h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #1f2937;
+        }
+
+
+        .help-card p {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 0 0 10px;
+        }
+
+
+        .help-card ul {
+            margin: 8px 0 0;
+            padding-left: 20px;
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           QUICK HELP
+        ===================================================== */
+
+        .quick-help {
+            margin-top: 20px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+
+        .quick-help h2 {
+            margin: 0 0 18px;
+            font-size: 18px;
+            color: #111827;
+        }
+
+
+        .quick-help-row {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 14px;
+        }
+
+
+        .quick-help-item {
+            padding: 16px;
+            border-radius: 12px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+        }
+
+
+        .quick-help-item i {
+            color: #4f46e5;
+            margin-right: 6px;
+        }
+
+
+        .quick-help-item strong {
+            font-size: 13px;
+            color: #1f2937;
+        }
+
+
+        .quick-help-item p {
+            margin: 7px 0 0;
+            font-size: 12px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .help-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-help-row {
+                grid-template-columns: 1fr;
+            }
+
+            .help-header-content {
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo-section">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+
+                <h2>StudentTask</h2>
+
+                <p>
+                    Academic Task Manager
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="menu-section">
+
+            <p class="menu-title">
+                MAIN MENU
+            </p>
+
+
+            <a
+                href="dashboard.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-table-columns"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="tasks.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-list-check"></i>
+
+                <span>
+                    My Tasks
+                </span>
+
+            </a>
+
+
+            <a
+                href="analytics.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>
+                    Analytics
+                </span>
+
+            </a>
+
+
+            <p class="menu-title account-title">
+                ACCOUNT
+            </p>
+
+
+            <a
+                href="profile.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-user"></i>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="menu-item"
+            >
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- SIDEBAR BOTTOM -->
+
+        <div class="sidebar-bottom">
+
+            <div
+    class="help-box"
+    id="need-help-btn"
+    role="button"
+    tabindex="0"
+>
+                <i
+                    class="fa-solid fa-circle-question"
+                ></i>
+
+                <div>
+
+                    <strong>
+                        Need help?
+                    </strong>
+
+                    <p>
+                        Manage your tasks easily.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="sidebar-logout-btn"
+                class="logout-link"
+            >
+
+                <i
+                    class="fa-solid fa-right-from-bracket"
+                ></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Help Center
+                </h1>
+
+                <p>
+                    Get help using the Student Task Manager.
+                </p>
+
+            </div>
+
+
+            <div class="user-area">
+
+                <div class="welcome">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <div>
+
+                        <span>
+                            Welcome back
+                        </span>
+
+                        <strong id="username">
+                            Student
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             HELP CONTENT
+        ================================================= -->
+
+        <section class="help-container">
+
+
+            <!-- INTRO -->
+
+            <div class="help-header-card">
+
+                <div class="help-header-content">
+
+                    <div class="help-main-icon">
+
+                        <i
+                            class="fa-solid fa-circle-question"
+                        ></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h2>
+                            How can we help?
+                        </h2>
+
+                        <p>
+                            Learn how to use the main features
+                            of your Student Task Manager.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- HELP GRID -->
+
+            <div class="help-grid">
+
+
+                <!-- TASKS -->
+
+                <div class="help-card">
+
+                    <div class="help-card-top">
+
+                        <div class="help-card-icon">
+
+                            <i
+                                class="fa-solid fa-list-check"
+                            ></i>
+
+                        </div>
+
+                        <h3>
+                            Managing Tasks
+                        </h3>
+
+                    </div>
+
+                    <p>
+                        Use My Tasks to manage all your
+                        academic tasks.
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            Create a new task.
+                        </li>
+
+                        <li>
+                            Add title, description,
+                            priority and deadline.
+                        </li>
+
+                        <li>
+                            Edit existing tasks.
+                        </li>
+
+                        <li>
+                            Mark tasks as completed.
+                        </li>
+
+                        <li>
+                            Delete tasks when they are
+                            no longer needed.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- DASHBOARD -->
+
+                <div class="help-card">
+
+                    <div class="help-card-top">
+
+                        <div class="help-card-icon">
+
+                            <i
+                                class="fa-solid fa-table-columns"
+                            ></i>
+
+                        </div>
+
+                        <h3>
+                            Dashboard
+                        </h3>
+
+                    </div>
+
+                    <p>
+                        The Dashboard gives you a quick
+                        overview of your academic work.
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            View total tasks.
+                        </li>
+
+                        <li>
+                            Check completed tasks.
+                        </li>
+
+                        <li>
+                            See pending tasks.
+                        </li>
+
+                        <li>
+                            Check upcoming deadlines.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- ANALYTICS -->
+
+                <div class="help-card">
+
+                    <div class="help-card-top">
+
+                        <div class="help-card-icon">
+
+                            <i
+                                class="fa-solid fa-chart-line"
+                            ></i>
+
+                        </div>
+
+                        <h3>
+                            Analytics
+                        </h3>
+
+                    </div>
+
+                    <p>
+                        Analytics helps you understand
+                        your task performance.
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            View task completion rate.
+                        </li>
+
+                        <li>
+                            Analyze completed and pending
+                            tasks.
+                        </li>
+
+                        <li>
+                            Monitor your academic progress.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- PROFILE -->
+
+                <div class="help-card">
+
+                    <div class="help-card-top">
+
+                        <div class="help-card-icon">
+
+                            <i
+                                class="fa-solid fa-user"
+                            ></i>
+
+                        </div>
+
+                        <h3>
+                            Profile
+                        </h3>
+
+                    </div>
+
+                    <p>
+                        Manage your personal student
+                        information from Profile.
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            View your profile.
+                        </li>
+
+                        <li>
+                            Click Edit Profile to edit
+                            your information.
+                        </li>
+
+                        <li>
+                            Click Save Changes to save
+                            your updates.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- SETTINGS -->
+
+                <div class="help-card">
+
+                    <div class="help-card-top">
+
+                        <div class="help-card-icon">
+
+                            <i
+                                class="fa-solid fa-gear"
+                            ></i>
+
+                        </div>
+
+                        <h3>
+                            Settings
+                        </h3>
+
+                    </div>
+
+                    <p>
+                        Customize your Student Task Manager
+                        preferences.
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            Enable or disable Dark Mode.
+                        </li>
+
+                        <li>
+                            Enable Task Notifications.
+                        </li>
+
+                        <li>
+                            Enable Task Reminders.
+                        </li>
+
+                        <li>
+                            Enable Email Reminders.
+                        </li>
+
+                        <li>
+                            Select default task priority
+                            and view.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="help-card">
+
+                    <div class="help-card-top">
+
+                        <div class="help-card-icon">
+
+                            <i
+                                class="fa-solid fa-lock"
+                            ></i>
+
+                        </div>
+
+                        <h3>
+                            Forgot Password
+                        </h3>
+
+                    </div>
+
+                    <p>
+                        If you forget your password,
+                        you can reset it from the login page.
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            Open the login page.
+                        </li>
+
+                        <li>
+                            Click Forgot Password.
+                        </li>
+
+                        <li>
+                            Enter your email address.
+                        </li>
+
+                        <li>
+                            Enter your security answer
+                            if requested.
+                        </li>
+
+                        <li>
+                            Enter and confirm your new
+                            password.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- QUICK HELP -->
+
+            <div class="quick-help">
+
+                <h2>
+                    Quick Help
+                </h2>
+
+
+                <div class="quick-help-row">
+
+
+                    <div class="quick-help-item">
+
+                        <strong>
+
+                            <i
+                                class="fa-solid fa-plus"
+                            ></i>
+
+                            Create Task
+
+                        </strong>
+
+                        <p>
+                            Go to My Tasks and use the
+                            Add Task button.
+                        </p>
+
+                    </div>
+
+
+                    <div class="quick-help-item">
+
+                        <strong>
+
+                            <i
+                                class="fa-solid fa-user-pen"
+                            ></i>
+
+                            Edit Profile
+
+                        </strong>
+
+                        <p>
+                            Open Profile and click
+                            Edit Profile.
+                        </p>
+
+                    </div>
+
+
+                    <div class="quick-help-item">
+
+                        <strong>
+
+                            <i
+                                class="fa-solid fa-bell"
+                            ></i>
+
+                            Notifications
+
+                        </strong>
+
+                        <p>
+                            Open Settings and enable
+                            the notification switch.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script src="../js/api.js"></script>
+
+    <script src="../js/help.js"></script>
+
+    <script src="../js/logout.js"></script>
+
+
+</body>
+
+</html>
